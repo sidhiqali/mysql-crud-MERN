@@ -8,11 +8,13 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+
+
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "password",
-  database: "test_schema",
+  host: process.env.DB_HOST, // Set this in your Render environment
+  user: process.env.DB_USER, // Set this in your Render environment
+  password: process.env.DB_PASSWORD, // Set this in your Render environment
+  database: process.env.DB_DATABASE, // Set this in your Render environment
 });
 
 app.get("/books", (req, res) => {
