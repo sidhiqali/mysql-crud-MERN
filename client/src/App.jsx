@@ -1,0 +1,28 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/home";
+import Add from "./pages/add";
+import Navbar from "./components/Navbar";
+
+function App() {
+  return (
+    <>
+      <Navbar />
+      <Routes>
+        <Route
+          path="/"
+          element={<Home />}
+        />
+        <Route
+          path="/add"
+          element={<Add />}
+        />
+        <Route
+          path="/update/:id"
+          element={<Add />}
+        />
+      </Routes>
+    </>
+  );
+}
+
+export default App;
