@@ -1,21 +1,27 @@
 import React, { useEffect, useState } from "react";
 import BookCard from "../components/BookCard";
+import axios from "axios";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
     const fetchBooks = async () => {
-      const response = await fetch(
-        "https://booklibrary-4sox.onrender.com/books"
-      );
-      console.log(response);
-      const data = await response.json();
-      setBooks(data);
+      try {
+        const response = await axios.get(
+          "https://booklibrary-4sox.onrender.com/books"
+        );
+        console.log(response);
+        const data = response.data;
+        setBooks(data);
+      } catch (error) {
+        console.error("Error fetching books:", error);
+      }
     };
+
     fetchBooks();
   }, []);
-
+  console.log(books);
   return (
     <div className="main px-10">
       <div className="head  flex justify-around items-center py-5">
