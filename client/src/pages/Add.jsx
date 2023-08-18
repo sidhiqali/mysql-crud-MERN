@@ -45,7 +45,6 @@ const Add = () => {
       navigate("/");
     } catch (error) {
       console.error("Error performing database operation:", error);
-      alert(error);
     }
   };
   useEffect(() => {
