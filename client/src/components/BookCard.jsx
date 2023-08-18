@@ -16,7 +16,7 @@ const BookCard = ({ book }) => {
 
     if (confirmed) {
       try {
-        await axios.delete(`http://localhost:3000/books/${id}`);
+        await axios.delete(`https://mysql-crud-lb8n.onrender.com/books/${id}`);
         window.location.reload();
       } catch (error) {
         console.error("Error deleting book:", error);
