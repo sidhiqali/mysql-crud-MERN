@@ -8,7 +8,9 @@ const Home = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/books");
+        const response = await axios.get(
+          "https://mysql-crud-lb8n.onrender.com/books"
+        );
         console.log(response);
         const data = response.data;
         setBooks(data);

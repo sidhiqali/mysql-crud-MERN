@@ -27,13 +27,13 @@ const Add = () => {
 
     try {
       if (id) {
-        await axios.put(`http://localhost:3000/books/${id}`, {
+        await axios.put(`https://mysql-crud-lb8n.onrender.com/books/${id}`, {
           title: data.title,
           cover: url,
           desc: data.desc,
         });
       } else {
-        await axios.post("http://localhost:3000/books/", {
+        await axios.post("https://mysql-crud-lb8n.onrender.com/books/", {
           title: data.title,
           cover: url,
           desc: data.desc,
@@ -52,7 +52,7 @@ const Add = () => {
     if (id) {
       const fetchData = async () => {
         try {
-          const response = await axios.get(`http://localhost:3000/books/${id}`);
+          const response = await axios.get(`https://mysql-crud-lb8n.onrender.com/books/${id}`);
           const fetchedData = response.data[0];
           setData({
             title: fetchedData.title,
