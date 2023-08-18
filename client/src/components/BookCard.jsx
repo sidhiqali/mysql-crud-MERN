@@ -16,7 +16,7 @@ const BookCard = ({ book }) => {
 
     if (confirmed) {
       try {
-        await axios.delete(`https://booklibrary-4sox.onrender.com/books/${id}`);
+        await axios.delete(`http://localhost:3000/books/${id}`);
         window.location.reload();
       } catch (error) {
         console.error("Error deleting book:", error);

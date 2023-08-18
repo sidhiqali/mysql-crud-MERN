@@ -8,9 +8,7 @@ const Home = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get(
-          "https://booklibrary-4sox.onrender.com/books"
-        );
+        const response = await axios.get("http://localhost:3000/books");
         console.log(response);
         const data = response.data;
         setBooks(data);
