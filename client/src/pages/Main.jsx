@@ -13,7 +13,7 @@ const Home = () => {
         const data = response.data;
         setBooks(data);
       } catch (error) {
-        console.error('Error fetching books:', error);
+        console.error('Error on fetching books:', error);
       }
     };
 
