@@ -33,11 +33,7 @@ const Add = () => {
           desc: data.desc,
         });
       } else {
-<<<<<<< HEAD
         await axios.post("http://localhost:3000/books/", {
-=======
-        await axios.post('http://localhost:3000/books/', {
->>>>>>> origin/main
           title: data.title,
           cover: url,
           desc: data.desc,
@@ -48,11 +44,7 @@ const Add = () => {
       setIsLoading(false);
       navigate('/');
     } catch (error) {
-<<<<<<< HEAD
       console.error("Error performing database operation:", error);
-=======
-      console.error('Error performing database operation:', error);
->>>>>>> origin/main
     }
   };
   useEffect(() => {

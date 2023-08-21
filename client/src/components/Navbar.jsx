@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
-import avatar from '../assets/images/avatar.jpeg';
+import avatar from "../assets/images/avatar.jpeg";
 const Navbar = () => {
   const user = {
     isAdmin: false,
@@ -29,15 +29,16 @@ const Navbar = () => {
             <div className="flex items-center">
               <div className="profile h-11 flex items-center mx-3 border shadow-inner border-slate-00 pr-2 rounded-3xl bg-[#f2f0f0]">
                 <div className="avtr mr-2 h-10 w-10 ">
-                  <img className="rounded-full"
+                  <img
+                    className="rounded-full"
                     src={avatar}
                     alt="avatar"
                   />
                 </div>
                 <div className="name mx-1">Rahul</div>
               </div>
-              <button class="relative  inline-flex items-center justify-center p-0.5 mx-3 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-slate-300 w-24 to-slate-400   hover:text-white  focus:outline-none">
-                <span class="relative w-24 px-5 py-2 transition-all ease-in duration-75 bg-[#f0f0f0]  rounded-md group-hover:bg-opacity-0">
+              <button className="relative  inline-flex items-center justify-center p-0.5 mx-3 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-slate-300 w-24 to-slate-400   hover:text-white  focus:outline-none">
+                <span className="relative w-24 px-5 py-2 transition-all ease-in duration-75 bg-[#f0f0f0]  rounded-md group-hover:bg-opacity-0">
                   Logout
                 </span>
               </button>
@@ -46,12 +47,12 @@ const Navbar = () => {
             <div>
               <button
                 type="button"
-                class="text-white bg-gradient-to-r from-cyan-500 w-24 to-[#0d6491] hover:bg-gradient-to-bl focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                className="text-white bg-gradient-to-r from-cyan-500 w-24 to-[#0d6491] hover:bg-gradient-to-bl focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
               >
                 Login
               </button>
-              <button class="relative  inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 w-24 to-[#0d6491]   hover:text-white  focus:outline-none">
-                <span class="relative px-5 py-2 transition-all ease-in duration-75 bg-[#f0f0f0]  rounded-md group-hover:bg-opacity-0">
+              <button className="relative  inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 w-24 to-[#0d6491]   hover:text-white  focus:outline-none">
+                <span className="relative px-5 py-2 transition-all ease-in duration-75 bg-[#f0f0f0]  rounded-md group-hover:bg-opacity-0">
                   Register
                 </span>
               </button>
