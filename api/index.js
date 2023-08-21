@@ -1,19 +1,17 @@
 import express from "express";
-import mysql from "mysql";
 import dotenv from "dotenv";
+import { db } from "./mysqlConnection/mysql.js";
 import cors from "cors";
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use('/api/auth',authRoute)
+app.use('/api/user',userRoute)
+app.use('/api/admin',adminRoute);
+app.use('/api/books',booksRoute);
 
-const db = mysql.createConnection({
-  host: process.env.DB_HOST, 
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-});
 
 app.get("/books", (req, res) => {
   const q = "SELECT * FROM books";

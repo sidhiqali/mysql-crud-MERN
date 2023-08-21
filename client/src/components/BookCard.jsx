@@ -16,7 +16,7 @@ const BookCard = ({ book }) => {
 
     if (confirmed) {
       try {
-        await axios.delete(`https://mysql-crud-lb8n.onrender.com/books/${id}`);
+        await axios.delete(`http://localhost:3000/books/${id}`);
         window.location.reload();
       } catch (error) {
         console.error("Error deleting book:", error);
@@ -25,31 +25,27 @@ const BookCard = ({ book }) => {
   };
 
   return (
-    <div className="main text-gray-600 w-64 rounded-sm border m-5 flex flex-col justify-between items-center">
-      <div className="img  h-80 w-full flex justify-center ">
+    <div className="main   text-gray-600 shadow-inner w-64 rounded-md border border-slate-200 pb-2 m-5 flex flex-col justify-between items-center">
+      <div className="img p-3  h-80 w-full flex justify-center ">
         <img
-          className="w-full rounded-sm"
+          className="w-full rounded-md shadow-md hover:shadow-2xl "
           src={book.cover}
           alt="cover photo"
         />
       </div>
       <div className="bottom flex flex-col w-full">
-        <div className="write flex flex-col w-full justify-center items-center ">
-          <div className="title text-lg py-2">{book.title}</div>
-          <div className="desc text-sm text-center px-3 pb-3">{book.desc}</div>
+        <div className="write flex flex-col w-full p-1 justify-center items-center ">
+          <div className="head flex items-center  justify-between ">
+            <div className="title text-lg text-slate-700 ">{book.title}</div>
+            <div className="price text-xl text-teal-800  px-3">${book.price}</div>
+          </div>
+          <div className="desc text-sm text-center text-slate-500 pb-3">{book.desc}</div>
         </div>
         <div className="buttons w-full h-8 flex justify-end">
           <button
-            onClick={handleDelete}
-            className="bg-indigo-400  w-1/2 text-white rounded-l-sm "
+            className=" bg-gradient-to-r from-[#31a9bd] to-[#378499] mx-5  w-full text-white rounded-sm"
           >
-            Delete
-          </button>
-          <button
-            onClick={handleUpdate}
-            className="bg-slate-600 w-1/2 text-white rounded-r-sm"
-          >
-            Update
+            Purchase
           </button>
         </div>
       </div>
