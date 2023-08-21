@@ -16,7 +16,7 @@ const BookCard = ({ book }) => {
 
     if (confirmed) {
       try {
-        await axios.delete(`http://localhost:3000/books/${id}`);
+        await axios.delete(`http://localhost:3000/api/books/${id}`);
         window.location.reload();
       } catch (error) {
         console.error('Error deleting book:', error);

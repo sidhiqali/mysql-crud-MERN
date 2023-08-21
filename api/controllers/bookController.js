@@ -5,7 +5,7 @@ export const getBooks = async (req, res) => {
     const books = await Book.findAll();
     res.json(books);
   } catch (error) {
-    res.status(500).json({ error: "Error fetching books" });
+    res.status(500).json(error);
   }
 };
 
@@ -24,6 +24,7 @@ export const getBook = async (req, res) => {
 
 export const createBook = async (req, res) => {
   const { title, desc, cover } = req.body;
+  console.log(title, desc, cover);
   try {
     const book = await Book.create({ title, desc, cover });
     res.json({ message: "Book created successfully", book });

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import BookCard from "../components/BookCard";
 import axios from "axios";
 
@@ -10,7 +10,7 @@ const PaginationExample = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/books");
+        const response = await axios.get("http://localhost:3000/api/books");
         const data = response.data;
         setBooks(data);
       } catch (error) {
