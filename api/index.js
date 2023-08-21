@@ -1,6 +1,5 @@
 import express from "express";
 import dotenv from "dotenv";
-import { db } from "./mysqlConnection/mysql.js";
 import authRoute from './routes/authRoute.js'
 import userRoute from './routes/userRoute.js'
 import adminRoute from './routes/adminRoute.js'

@@ -1,9 +1,9 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { User } from "../models"; // Assuming your User model is imported here
-import { createError } from "../utils/creatError";
+import User from "../models/user.js"; // Assuming your User model is imported here
+import { createError } from "../utils/creatError.js";
 
-export const register = async (req, res,next) => {
+export const register = async (req, res, next) => {
   const { username, email, password, isAdmin } = req.body;
 
   try {
@@ -12,7 +12,7 @@ export const register = async (req, res,next) => {
       username,
       email,
       password: hashedPassword,
-      isAdmin:false,
+      isAdmin: false,
     });
 
     res.json({ message: "User registered successfully", user });
@@ -27,21 +27,27 @@ export const login = async (req, res) => {
   try {
     const user = await User.findOne({ where: { email } });
     if (!user) {
-      return next(createError(404, "User not found"))
+      return next(createError(404, "User not found"));
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return next(createError(401, "Invalid credentials"))
+      return next(createError(401, "Invalid credentials"));
     }
 
-    const token = jwt.sign({ userId: user.id,isAdmin:user.isAdmin }, process.env.JWT_KEY,);
+    const token = jwt.sign(
+      { userId: user.id, isAdmin: user.isAdmin },
+      process.env.JWT_KEY
+    );
     const { password, ...info } = user?._doc;
-    res.cookie('accessToken',token,{
-        sameSite:'none',
-        secure:true,
-    expiresIn: '10d',
-    }).status(200).send(info)
+    res
+      .cookie("accessToken", token, {
+        sameSite: "none",
+        secure: true,
+        expiresIn: "10d",
+      })
+      .status(200)
+      .send(info);
   } catch (error) {
     res.status(500).json({ error: "Error logging in" });
   }

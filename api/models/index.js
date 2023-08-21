@@ -22,6 +22,12 @@ if (config.use_env_variable) {
   );
 }
 
+const models = [
+  require("./book")(sequelize, Sequelize.DataTypes),
+  require("./user")(sequelize, Sequelize.DataTypes),
+  // Add other models here if needed
+];
+
 fs.readdirSync(__dirname)
   .filter((file) => {
     return (
