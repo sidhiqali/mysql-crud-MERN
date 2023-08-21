@@ -12,6 +12,12 @@ app.use('/api/user',userRoute)
 app.use('/api/admin',adminRoute);
 app.use('/api/books',booksRoute);
 
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "password",
+  database: "test_schema",
+});
 
 app.get("/books", (req, res) => {
   const q = "SELECT * FROM books";
