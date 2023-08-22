@@ -1,7 +1,7 @@
-import { DataTypes } from "sequelize";
+import { DataTypes } from 'sequelize';
 
 const defineUserModel = (sequelize) => {
-  const User = sequelize.define("User", {
+  const User = sequelize.define('User', {
     username: {
       type: DataTypes.STRING,
       allowNull: false,
