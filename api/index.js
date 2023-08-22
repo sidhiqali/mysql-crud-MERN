@@ -4,6 +4,7 @@ import authRoute from './routes/authRoute.js'
 import userRoute from './routes/userRoute.js'
 import adminRoute from './routes/adminRoute.js'
 import booksRoute from './routes/booksRoute.js'
+import db from './models/index.js'
 import cors from "cors";
 dotenv.config();
 
@@ -20,6 +21,14 @@ app.use((err, req, res, next) => {
   const errorMessage = err.message || 'Something went wrong';
   res.status(errorStatus).send(errorMessage);
 });
+
+db.sequelize.sync()
+  .then(() => {
+    console.log("Synced db.");
+  })
+  .catch((err) => {
+    console.log("Failed to sync db: " + err.message);
+  });
 
 
 app.get("/", (req, res) => {
