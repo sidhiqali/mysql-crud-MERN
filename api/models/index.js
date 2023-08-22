@@ -1,6 +1,7 @@
 import dbConfig from "../config/db.config.js";
 import Sequelize from "sequelize";
 import defineBookModel from "./book.js";
+import defineUserModel from "./user.js";
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
@@ -20,6 +21,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.books = defineBookModel(sequelize);
+db.users = defineUserModel(sequelize);
 
 db.sequelize.sync({ force: false }).then(() => {
   console.log("Drop and re-sync db.");

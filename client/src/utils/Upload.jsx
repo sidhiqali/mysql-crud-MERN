@@ -21,8 +21,7 @@ const Upload = async (file) => {
     return secure_url;
   } catch (error) {
     console.log(error);
-    alert(error?.response?.data);
-  }
+    }
 };
 
 export default Upload;

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
+import { sentRequest } from "../utils/baseUrl";
 const BookCard = ({ book }) => {
   const navigate = useNavigate();
 
@@ -16,7 +17,7 @@ const BookCard = ({ book }) => {
 
     if (confirmed) {
       try {
-        await axios.delete(`http://localhost:3000/books/${id}`);
+        await sentRequest.delete(`/books/${id}`);
         window.location.reload();
       } catch (error) {
         console.error("Error deleting book:", error);
@@ -33,19 +34,22 @@ const BookCard = ({ book }) => {
           alt="cover photo"
         />
       </div>
-      <div className="bottom flex flex-col w-full">
+      <div className="bottom flex flex-col w-full px-3">
         <div className="write flex flex-col w-full p-1 justify-center items-center ">
           <div className="head flex items-center  justify-between ">
-            <div className="title text-lg text-slate-700 ">{book.title}</div>
-            <div className="price text-xl text-teal-800  px-3">${book.price}</div>
+            <div className="title text-lg text-slate-700 text-center ">
+              {book.title}
+            </div>
           </div>
-          <div className="desc text-sm text-center text-slate-500 pb-3">{book.desc}</div>
+          <div className="desc text-sm text-center text-slate-500 pb-3">
+            {book.desc}
+          </div>
         </div>
         <div className="buttons w-full h-8 flex justify-end">
-          <button
-            className=" bg-gradient-to-r from-[#31a9bd] to-[#378499] mx-5  w-full text-white rounded-sm"
-          >
-            Purchase
+          <button className=" bg-gradient-to-r from-[#31a9bd] to-[#378499] hover:bg-[#25cbe8] mx-5  w-full text-white rounded-md flex justify-around items-center">
+            {" "}
+            <span>₹{book.price}</span>
+            <span>Purchase</span>
           </button>
         </div>
       </div>

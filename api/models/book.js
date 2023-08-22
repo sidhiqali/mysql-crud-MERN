@@ -5,6 +5,7 @@ const defineBookModel = (sequelize) => {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     desc: {
       type: DataTypes.TEXT,
@@ -19,7 +20,6 @@ const defineBookModel = (sequelize) => {
       allowNull: false,
     },
   });
-
 
   return Book;
 };

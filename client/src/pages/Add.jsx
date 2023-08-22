@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Upload from "../utils/Upload";
 import axios from "axios";
+import { sentRequest } from "../utils/baseUrl";
 
 const Add = () => {
   const location = useLocation();
@@ -14,8 +15,9 @@ const Add = () => {
     title: "",
     cover: "",
     desc: "",
-    price: "",
+    price: 0,
   });
+  
   const handleChange = (e) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -28,14 +30,14 @@ const Add = () => {
 
     try {
       if (id) {
-        await axios.put(`http://localhost:3000/api/books/${id}`, {
+        await sentRequest.put(`/books/${id}`, {
           title: data.title,
           cover: url,
           price: data.price,
           desc: data.desc,
         });
       } else {
-        await axios.post("http://localhost:3000/api/books/", {
+        await sentRequest.post("/books", {
           title: data.title,
           cover: url,
           price: data.price,
@@ -44,23 +46,26 @@ const Add = () => {
       }
 
       console.log("Database operation successful");
-      setIsLoading(false);
+      
       navigate("/");
     } catch (error) {
       console.error("Error performing database operation:", error);
+    
     }
+    setIsLoading(false);
   };
   useEffect(() => {
     if (id) {
       const fetchData = async () => {
         try {
-          const response = await axios.get(
-            `http://localhost:3000/api/books/${id}`
+          const response = await newRequest(
+            `/books/${id}`
           );
-          const fetchedData = response.data[0];
+          const fetchedData = response.data;
           setData({
             title: fetchedData.title,
             desc: fetchedData.desc,
+            price: fetchedData.price,
           });
         } catch (error) {
           console.error("Error fetching data:", error);

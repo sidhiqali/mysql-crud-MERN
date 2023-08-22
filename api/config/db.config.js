@@ -12,4 +12,4 @@ const dbConfig = {
     }
   };
 
-  export default dbConfig
+  export default db

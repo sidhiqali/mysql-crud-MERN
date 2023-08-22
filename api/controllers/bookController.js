@@ -2,6 +2,9 @@ import db from "../models/index.js";
 import { createError } from "../utils/creatError.js";
 const Book = db.books;
 
+//@desc get all books
+//@route GET /api/books
+//@access public
 export const getBooks = async (req, res, next) => {
   try {
     const books = await Book.findAll();
@@ -10,6 +13,10 @@ export const getBooks = async (req, res, next) => {
     next(error);
   }
 };
+
+//@desc get a single book
+//@route GET /api/books/:id
+//@access public
 
 export const getBook = async (req, res, next) => {
   const { id } = req.params;
@@ -24,19 +31,27 @@ export const getBook = async (req, res, next) => {
   }
 };
 
+//@desc create a new book
+//@route POST /api/books
+//@access private
+
 export const createBook = async (req, res, next) => {
-  const { title, desc, cover,price } = req.body;
+  const { title, desc, cover, price } = req.body;
   if (!title || !desc || !cover || !price) {
     return next(createError(400, "Title ,desc ,price and cover are required"));
   }
 
   try {
-    const book = await Book.create({ title, desc, cover,price });
+    const book = await Book.create({ title, desc, cover, price });
     res.json({ message: "Book created successfully", book });
   } catch (error) {
     next(error);
   }
 };
+
+//@desc delete a  book
+//@route DELETE /api/books/:id
+//@access private
 
 export const deleteBook = async (req, res, next) => {
   const { id } = req.params;
@@ -52,9 +67,13 @@ export const deleteBook = async (req, res, next) => {
   }
 };
 
+//@desc update a  book
+//@route PUT /api/books/:id
+//@access private
+
 export const updateBook = async (req, res, next) => {
   const { id } = req.params;
-  const { title, desc, cover,price } = req.body;
+  const { title, desc, cover, price } = req.body;
   try {
     const book = await Book.findByPk(id);
     if (!book) {

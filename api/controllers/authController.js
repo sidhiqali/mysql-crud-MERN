@@ -1,10 +1,14 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import User from "../models/user.js"; // Assuming your User model is imported here
+import db from "../models/index.js";
+const User = db.users;
 import { createError } from "../utils/creatError.js";
 
+//@desc register a new user
+//@route POST /api/auth/register
+//@access public
 export const register = async (req, res, next) => {
-  const { username, email, password, isAdmin } = req.body;
+  const { username, email, password } = req.body;
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -21,8 +25,12 @@ export const register = async (req, res, next) => {
   }
 };
 
-export const login = async (req, res) => {
-  const { email, password } = req.body;
+//@desc login user
+//@route POST /api/auth/login
+//@access public
+
+export const login = async (req, res, next) => {
+  const { email } = req.body;
 
   try {
     const user = await User.findOne({ where: { email } });
@@ -30,16 +38,19 @@ export const login = async (req, res) => {
       return next(createError(404, "User not found"));
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
     if (!isPasswordValid) {
-      return next(createError(401, "Invalid credentials"));
+      return next(createError(401, "Incorrect password"));
     }
 
     const token = jwt.sign(
       { userId: user.id, isAdmin: user.isAdmin },
       process.env.JWT_KEY
     );
-    const { password, ...info } = user?._doc;
+    const { password, ...info } = user?.dataValues;
     res
       .cookie("accessToken", token, {
         sameSite: "none",
@@ -49,11 +60,21 @@ export const login = async (req, res) => {
       .status(200)
       .send(info);
   } catch (error) {
-    res.status(500).json({ error: "Error logging in" });
+    next(error);
   }
 };
 
+
+//@desc logout user
+//@route POST /api/auth/logout
+//@access public
+
 export const logout = (req, res) => {
-  // You can clear any cookies or tokens here, if needed
-  res.json({ message: "Logout successful" });
+  res
+    .clearCookie("accessToken", {
+      sameSite: "none",
+      secure: true,
+    })
+    .status(200)
+    .send("user has been logged out");
 };

@@ -1,6 +1,7 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import BookCard from "../components/BookCard";
 import axios from "axios";
+import { sentRequest } from "../utils/baseUrl";
 
 const PaginationExample = () => {
   const [books, setBooks] = useState([]);
@@ -10,7 +11,7 @@ const PaginationExample = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/books");
+        const response = await sentRequest("/books");
         const data = response.data;
         setBooks(data);
       } catch (error) {
@@ -42,21 +43,33 @@ const PaginationExample = () => {
   return (
     <div className="main bg-[#f2f0f0] px-10 flex flex-col items-center">
       <div className="head flex justify-around items-center py-2">
-        <div className="text-3xl font-semibold text-slate-400 my-3">Available Collection</div>
+        <div className="text-3xl font-semibold text-slate-400 my-3">
+          Available Collection
+        </div>
       </div>
       <div className="second flex flex-wrap">
         {currentBooks.map((book) => (
-          <BookCard key={book?.book_id} book={book} />
+          <BookCard
+            key={book?.id}
+            book={book}
+          />
         ))}
       </div>
       <div className="pagination py-5 text-slate-500">
-        <button className="pagination-button mr-3 bg-[#32a4bd] w-20 rounded-md text-sm text-slate-100 px-3 py-2" onClick={prevPage}>
+        <button
+          className="pagination-button mr-3 bg-[#32a4bd] w-20 rounded-md text-sm text-slate-100 px-3 py-2"
+          onClick={prevPage}
+        >
           Previous
         </button>
         <span className="page-info">
-          Page <span className="text-[#32a4bd] text-lg ">{currentPage}</span>  of {totalPages}
+          Page <span className="text-[#32a4bd] text-lg ">{currentPage}</span> of{" "}
+          {totalPages}
         </span>
-        <button className="pagination-button ml-3 bg-[#32a4bd] w-20 rounded-md text-sm text-slate-100 px-3 py-2" onClick={nextPage}>
+        <button
+          className="pagination-button ml-3 bg-[#32a4bd] w-20 rounded-md text-sm text-slate-100 px-3 py-2"
+          onClick={nextPage}
+        >
           Next
         </button>
       </div>
