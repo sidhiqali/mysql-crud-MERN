@@ -32,10 +32,10 @@ const Login = () => {
         config
       );
 
-      setUser(result.data); // Set the user state directly from the result
-
+      setUser(result.data);
+      localStorage.setItem("currentUser", JSON.stringify(result.data));
       toast.success("Login successfully");
-      navigate("/");
+      result?.data?.isAdmin ? navigate("/admin/dashboard") : navigate("/");
     } catch (error) {
       toast.error(error?.response?.data || "An error occurred");
     }

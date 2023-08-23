@@ -47,7 +47,7 @@ const Add = () => {
 
       console.log("Database operation successful");
       
-      navigate("/");
+      navigate("/admin/dashboard");
     } catch (error) {
       console.error("Error performing database operation:", error);
     
@@ -58,7 +58,7 @@ const Add = () => {
     if (id) {
       const fetchData = async () => {
         try {
-          const response = await newRequest(
+          const response = await sentRequest(
             `/books/${id}`
           );
           const fetchedData = response.data;

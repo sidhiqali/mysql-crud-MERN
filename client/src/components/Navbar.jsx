@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import avatar from "../assets/images/avatar.jpeg";
 import { useContext } from "react";
 import { userContext } from "../context/userContext";
@@ -6,33 +6,36 @@ import { sentRequest } from "../utils/baseUrl";
 import { toast } from "react-hot-toast";
 const Navbar = () => {
   const { user, setUser } = useContext(userContext);
+  const navigate = useNavigate();
+  const handleAdd = () => {};
   const handleLogout = async () => {
     try {
       await sentRequest.post("/auth/logout");
       setUser(null);
+      localStorage.removeItem("currentUser");
       toast.success("logout successfully");
     } catch (error) {
+      a;
       toast.error(error?.response?.data || "an error occured while logout");
     }
   };
+
+  const handleNavigate = () => {
+    user?.isAdmin ? navigate("/admin/dashboard") : navigate("/");
+  };
   return (
-    <nav className="bg-[#f0f0f0] sticky top-0">
+    <nav className="bg-[#f0f0f0] sticky top-0 z-50">
       <d
         iv
         className="max-w-screen-xl flex items-center justify-between mx-auto p-4"
       >
-        <Link to="/">
-          <div className="text-3xl font-semibold text-[#438490] px-16">
-            BookStore
-          </div>
-        </Link>
-        {/* <button
-          onClick={handleAdd}
-          type="button"
-          className="focus:outline-none w-24 h-10 text-white bg-slate-400 hover:bg-indigo-800 border-slate-300 border font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
+        <div
+          onClick={handleNavigate}
+          className="text-3xl font-semibold text-[#438490] px-16"
         >
-          ADD
-        </button> */}
+          BookStore
+        </div>
+
         <div className="list flex">
           {user ? (
             <div className="flex items-center px-4">
