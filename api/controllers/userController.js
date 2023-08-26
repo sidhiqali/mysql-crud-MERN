@@ -2,6 +2,11 @@ import db from '../models/index.js';
 import { createError } from '../utils/creatError.js';
 const User = db.users;
 
+
+//@desc display all users
+//@route POST /api/user/
+//@access public
+
 export const getUsers = async (req, res, next) => {
   if (!req.isAdmin) {
     return next(403, 'Access denied: Admin privileges required');
