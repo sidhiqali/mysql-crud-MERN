@@ -47,7 +47,7 @@ const PaginationExample = () => {
           Available Collection
         </div>
       </div>
-      <div className="second flex flex-wrap">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {currentBooks.map((book) => (
           <BookCard
             key={book?.id}
