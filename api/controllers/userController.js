@@ -39,7 +39,7 @@ export const getUser = async (req, res, next) => {
 };
 
 //@desc DELETE a user
-//@route GET /api/user/:id
+//@route DELETE /api/user/:id
 //@access private
 
 export const deleteUser = async (req, res, next) => {
