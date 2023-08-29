@@ -4,7 +4,7 @@ import db from "../models/index.js";
 const User = db.users;
 import { createError } from "../utils/creatError.js";
 
-//@desc register a new user
+//@desc register  new user
 //@route POST /api/auth/register
 //@access public
 export const register = async (req, res, next) => {
